@@ -1,0 +1,16 @@
+---
+- hosts: tag_Name_WebServer
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - name: Installs nginx web server
+      apt: pkg=nginx state=latest update_cache=true
+      notify:
+        - start nginx
+
+  handlers:
+    - name: start nginx
+      service: name=nginx state=started
+...
