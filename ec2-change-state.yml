@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+          - name: change instances state
+            ec2:
+                    region: us-east-1
+                    state: absent #present, absent, running, restarted, stopped#
+                    instance_ids:
+                      - i-0b9482f679b42e4d9
+                      - i-0bce4fca5e5c13bd8
+
+...
