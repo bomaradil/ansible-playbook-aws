@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: create ec2 keypair
+      ec2_key:
+        region: us-east-1
+        name: ansiblekey
+        key_material: "{{ lookup('file', '/home/ansible/ansiblekey.pub') }}"
+...
