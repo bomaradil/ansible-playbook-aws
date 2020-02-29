@@ -11,3 +11,18 @@
                       - i-0bce4fca5e5c13bd8
 
 ...
+
+
+===================================================
+
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+          - name: change instances state
+            ec2:
+                    region: us-east-1
+                    state: stopped
+                    instance_tags:
+                      Name: [ WebServer, MySQL, MongoDB ]                                                                                                                                            
+...
