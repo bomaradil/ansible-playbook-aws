@@ -1,0 +1,29 @@
+---
+- name: Create a new Demo EC2 instance
+  hosts: localhost
+  gather_facts: False
+
+  vars:
+      region: us-east-1
+      instance_type: t2.nano
+      ami: ami-07ebfd5b3428b6f4d #UBUNTU#
+      keypair: ec2sysops # pem file name
+
+  tasks:
+
+    - name: Create an ec2 instance
+      ec2:
+         key_name: "{{ keypair }}"
+         group: launch-wizard-1  # security group name
+         instance_type: "{{ instance_type}}"
+         image: "{{ ami }}"
+         wait: true
+         region: "{{ region }}"
+         count: 3  # default
+         count_tag:
+            Name: DEMO
+         instance_tags:
+            Name: DEMO
+         vpc_subnet_id: subnet-0d53edaa642efc0e7
+         assign_public_ip: yes
+      register: ec2
